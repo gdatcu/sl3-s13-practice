@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qaschool</groupId>
+    <artifactId>hapifyme-tests</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!-- Setăm versiunea Java și encoding-ul -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!--
+          SECȚIUNEA 1: Dependența TestNG
+          Aceasta este dependența de bază pentru TestNG.
+          Maven o va descărca automat din Maven Central.
+          Folosim <scope>test</scope> deoarece avem nevoie de TestNG
+          doar pentru a rula teste, nu pentru a rula aplicația în producție.
+        -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.10.2</version> <!-- Puteți folosi cea mai recentă versiune -->
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Aici vom adăuga ulterior Selenium, RestAssured etc. -->
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--
+              SECȚIUNEA 2: Plugin-ul de rulare a testelor (Surefire)
+              Acesta este plugin-ul pe care Maven îl folosește
+              pentru a executa testele în faza 'test'.
+            -->
+            <!-- În interiorul <project><build><plugins> -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <!-- Aici îi spunem lui Surefire să folosească acest XML -->
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+            </plugin>
+
+
+            <!-- Plugin-ul de compilare, pentru a ne asigura că folosește Java 11 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+

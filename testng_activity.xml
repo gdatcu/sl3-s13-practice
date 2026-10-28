@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Registration_Validation_Suite" verbose="1">
+
+    <!-- Set de teste 1: Rulează DOAR testele de email -->
+    <test name="Email_Validation_Tests">
+        <groups>
+            <run>
+                <include name="email" />
+            </run>
+        </groups>
+        <classes>
+            <!-- Specificăm clasa unde se află grupurile -->
+            <class name="chapter4.RegistrationValidatorTest" />
+        </classes>
+    </test>
+
+    <!-- Set de teste 2: Rulează DOAR testele de parolă (fără "smoke") -->
+    <test name="Password_Regression_Tests">
+        <groups>
+            <run>
+                <include name="password" />
+                <exclude name="smoke" /> <!-- Excludem testul simplu -->
+            </run>
+        </groups>
+        <classes>
+            <class name="chapter4.RegistrationValidatorTest" />
+        </classes>
+    </test>
+
+</suite>

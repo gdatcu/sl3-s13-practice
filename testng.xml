@@ -1,0 +1,52 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="HapifyMe_Full_Regression_Suite" verbose="1">
+
+    <!--
+      Un tag <test> este un set logic de teste.
+      Aici se execută @BeforeTest / @AfterTest.
+    -->
+
+    <!-- "Test Set 1" va rula DOAR clasa LoginTest -->
+    <test name="Login_Tests">
+        <classes>
+            <class name="chapter2.LoginTest" />
+        </classes>
+    </test>
+
+    <!-- "Test Set 2" va rula DOAR clasa RegistrationTest -->
+    <test name="Registration_Tests">
+        <classes>
+            <class name="chapter2.RegistrationTest" />
+        </classes>
+    </test>
+
+    <!--
+      "Test Set 3" va rula DOAR testele din grupul "smoke".
+      TestNG va scana toate clasele listate mai jos
+      și va executa doar metodele marcate cu @Test(groups = "smoke").
+    -->
+    <test name="Smoke_Tests">
+        <groups>
+            <run>
+                <include name="smoke" />
+            </run>
+        </groups>
+        <classes>
+            <!-- Trebuie să specificăm ce clase să scaneze pentru grupul "smoke" -->
+            <class name="chapter2.LoginTest" />
+            <class name="chapter2.TestNGAnnotationOrderTest" />
+            <class name="chapter3.LoginValidatorTest" />
+        </classes>
+    </test>
+
+    <!--
+      "Test Set 4" va rula TOATE clasele din pachetul "com.hapifyme.api_tests".
+      Foarte util pentru a separa testele UI de cele API.
+    -->
+    <test name="API_Tests">
+        <packages>
+            <package name="com.hapifyme.api_tests" />
+        </packages>
+    </test>
+
+</suite>
